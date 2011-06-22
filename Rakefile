@@ -42,11 +42,11 @@ task :build => ["sproutcore:metal", "sproutcore:indexset", "sproutcore:runtime",
 
 file "tmp/static/sproutcore.js" => :build do
   File.open("tmp/static/sproutcore.js", "w") do |file|
-    file.puts File.read("tmp/static/handlebars.js")
+    # file.puts File.read("tmp/static/handlebars.js")
     file.puts File.read("tmp/static/sproutcore-metal.js")
     file.puts File.read("tmp/static/sproutcore-runtime.js")
-    file.puts File.read("tmp/static/sproutcore-views.js")
-    file.puts File.read("tmp/static/sproutcore-handlebars.js")
+    # file.puts File.read("tmp/static/sproutcore-views.js")
+    # file.puts File.read("tmp/static/sproutcore-handlebars.js")
   end
 end
 
