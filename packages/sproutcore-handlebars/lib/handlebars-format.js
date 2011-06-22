@@ -4,9 +4,13 @@
 // License:   Licensed under MIT license (see license.js)
 // ==========================================================================
 
+if ( typeof exports !== "undefined" ) {
+
 // TODO: should actually compile the template and THEN return that function.
 // This way we won't have to compile templates on the fly.  This version just
 // makes the compile happen when used.
-exports.compileFormat = function(tmpl) {
-  return '\nrequire("sproutcore-handlebars");\nreturn SC.Handlebars.compile('+JSON.stringify(tmpl)+');';
-};
+    exports.compileFormat = function(tmpl) {
+      return '\nrequire("sproutcore-handlebars");\nreturn SC.Handlebars.compile('+JSON.stringify(tmpl)+');';
+    };
+
+}
