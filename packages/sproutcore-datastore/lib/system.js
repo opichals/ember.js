@@ -13,4 +13,3 @@ require('sproutcore-datastore/system/record');
 require('sproutcore-datastore/system/record_array');
 require('sproutcore-datastore/system/store');
 require('sproutcore-datastore/system/store_error');
-

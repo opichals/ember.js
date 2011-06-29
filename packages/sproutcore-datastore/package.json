@@ -9,6 +9,7 @@
     "sproutcore-runtime": "2.0",
     "sproutcore-datetime": "2.0",
     "sproutcore-indexset": "2.0",
+    "sproutcore-ajax": "2.0",
     "sproutcore-preprocessor": "~> 0.0.2"
   },
   "plugin:preprocessors": [

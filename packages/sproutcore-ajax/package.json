@@ -1,0 +1,19 @@
+{
+  "name": "sproutcore-ajax",
+  "summary": "SproutCore AJAX",
+  "description": "The SproutCore AJAX Tools",
+  "homepage": "http://sproutcore.com",
+  "author": "Strobe Inc., Apple, Inc., and contributors",
+  "version": "2.0",
+  "dependencies": {
+    "sproutcore-runtime": "2.0"
+  },
+  "plugin:preprocessors": [
+    "sproutcore-preprocessor/preprocessor"
+  ],
+  "directories": {
+    "lib"       : "./lib",
+    "tests"     : "./tests"
+  }
+}
+
