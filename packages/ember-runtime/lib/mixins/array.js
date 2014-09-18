@@ -9,6 +9,7 @@
 import Ember from 'ember-metal/core'; // ES6TODO: Ember.A
 
 import { get } from 'ember-metal/property_get';
+import { peekMeta } from 'ember-metal/utils';
 import {
   computed,
   cacheFor
@@ -499,19 +500,43 @@ export default Mixin.create(Enumerable, {
     }
 
     sendEvent(this, '@array:change', [this, startIdx, removeAmt, addAmt]);
+    this.arrayFirstLastObjectChange();
 
+    return this;
+  },
+
+  /**
+    Default implementation of proper notification of the firstObject and
+    lastObject properties. It requires the #objectAt() to be called upon
+    array contents manipulation.
+
+    There might however be cases in which the notifications are not strictly
+    necessary or could trigger even when no real change has been made.
+    In such cases this method could be overriden with an alternate way.
+
+    As an example a dynamically loaded sparse arrays could be considered
+    where touching the #contentAt(index) would trigger a store layer
+    roundtrip.
+
+    @method arrayFirstLastObjectChange
+    @public
+  */
+  arrayFirstLastObjectChange: function() {
     var length = get(this, 'length');
-    var cachedFirst = cacheFor(this, 'firstObject');
-    var cachedLast = cacheFor(this, 'lastObject');
+    var meta = peekMeta(this);
+    var cache  = meta && meta.readableCache();
 
-    if (objectAt(this, 0) !== cachedFirst) {
-      propertyWillChange(this, 'firstObject');
-      propertyDidChange(this, 'firstObject');
-    }
-
-    if (objectAt(this, length - 1) !== cachedLast) {
-      propertyWillChange(this, 'lastObject');
-      propertyDidChange(this, 'lastObject');
+    if (cache) {
+        if (cache['firstObject'] !== undefined &&
+            this.objectAt(0) !== cacheFor(this, 'firstObject')) {
+          propertyWillChange(this, 'firstObject');
+          propertyDidChange(this, 'firstObject');
+        }
+        if (cache['lastObject'] !== undefined &&
+            this.objectAt(length - 1) !== cacheFor(this, 'lastObject')) {
+          propertyWillChange(this, 'lastObject');
+          propertyDidChange(this, 'lastObject');
+        }
     }
 
     return this;
